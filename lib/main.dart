@@ -19,19 +19,19 @@ class _MyQuizzerAppState extends State<MyQuizzerApp> {
 
   void questionValidation(bool userAnswer) {
     if (questionList[questionNumber].questionAnswer == userAnswer) {
-      if (scoreKeeper1.length < 15) {
+      if (scoreKeeper1.length < 14) {
         scoreKeeper1.add(Icon(Icons.done_rounded, color: Colors.lightGreen));
       } else {
-        if (scoreKeeper2.length < 15) {
+        if (scoreKeeper2.length < 14) {
           scoreKeeper2.add(Icon(Icons.done_rounded, color: Colors.lightGreen));
         }
       }
       resultingScore++;
     } else {
-      if (scoreKeeper1.length < 15) {
+      if (scoreKeeper1.length < 14) {
         scoreKeeper1.add(Icon(Icons.close_rounded, color: Colors.redAccent));
       } else {
-        if (scoreKeeper2.length < 15) {
+        if (scoreKeeper2.length < 14) {
           scoreKeeper2.add(Icon(Icons.close_rounded, color: Colors.redAccent));
         }
       }
@@ -83,7 +83,7 @@ class _MyQuizzerAppState extends State<MyQuizzerApp> {
                       style: TextStyle(
                           color: Colors.white,
                           fontFamily: 'Fascinate',
-                          fontSize: 37),
+                          fontSize: 31),
                     ),
                     onPressed: () {
                       setState(() {
@@ -104,7 +104,7 @@ class _MyQuizzerAppState extends State<MyQuizzerApp> {
                       style: TextStyle(
                           color: Colors.white,
                           fontFamily: 'Fascinate',
-                          fontSize: 37),
+                          fontSize: 31),
                     ),
                     onPressed: () {
                       setState(() {
@@ -138,3 +138,4 @@ class _MyQuizzerAppState extends State<MyQuizzerApp> {
     );
   }
 }
+
