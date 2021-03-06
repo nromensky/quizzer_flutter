@@ -14,6 +14,7 @@ class _MyQuizzerAppState extends State<MyQuizzerApp> {
   int questionNumber = 0;
   List<Icon> scoreKeeper = [];
   int resultingScore = 0;
+  int resultingPercent = 0;
 
   void questionValidation(bool userAnswer) {
     if (questionList[questionNumber].questionAnswer == userAnswer) {
@@ -26,10 +27,8 @@ class _MyQuizzerAppState extends State<MyQuizzerApp> {
     if (questionNumber < questionList.length - 1) {
       questionNumber++;
     } else {
-      Alert(
-              message:
-                  'That was last question. Your score is $resultingScore out of ${scoreKeeper.length}')
-          .show();
+      resultingPercent = (100 * resultingScore / scoreKeeper.length).round();
+      Alert(message: 'Your score is ${resultingPercent}%').show();
       questionNumber = 0;
       resultingScore = 0;
       scoreKeeper = [];
