@@ -12,26 +12,42 @@ class MyQuizzerApp extends StatefulWidget {
 
 class _MyQuizzerAppState extends State<MyQuizzerApp> {
   int questionNumber = 0;
-  List<Icon> scoreKeeper = [];
+  List<Icon> scoreKeeper1 = [];
+  List<Icon> scoreKeeper2 = [];
   int resultingScore = 0;
   int resultingPercent = 0;
 
   void questionValidation(bool userAnswer) {
     if (questionList[questionNumber].questionAnswer == userAnswer) {
-      scoreKeeper.add(Icon(Icons.done_rounded, color: Colors.lightGreen));
+      if (scoreKeeper1.length < 15) {
+        scoreKeeper1.add(Icon(Icons.done_rounded, color: Colors.lightGreen));
+      } else {
+        if (scoreKeeper2.length < 15) {
+          scoreKeeper2.add(Icon(Icons.done_rounded, color: Colors.lightGreen));
+        }
+      }
       resultingScore++;
     } else {
-      scoreKeeper.add(Icon(Icons.close_rounded, color: Colors.redAccent));
+      if (scoreKeeper1.length < 15) {
+        scoreKeeper1.add(Icon(Icons.close_rounded, color: Colors.redAccent));
+      } else {
+        if (scoreKeeper2.length < 15) {
+          scoreKeeper2.add(Icon(Icons.close_rounded, color: Colors.redAccent));
+        }
+      }
     }
 
     if (questionNumber < questionList.length - 1) {
       questionNumber++;
     } else {
-      resultingPercent = (100 * resultingScore / scoreKeeper.length).round();
+      resultingPercent =
+          (100 * resultingScore / (scoreKeeper1.length + scoreKeeper2.length))
+              .round();
       Alert(message: 'Your score is ${resultingPercent}%').show();
       questionNumber = 0;
       resultingScore = 0;
-      scoreKeeper = [];
+      scoreKeeper1 = [];
+      scoreKeeper2 = [];
     }
   }
 
@@ -102,8 +118,15 @@ class _MyQuizzerAppState extends State<MyQuizzerApp> {
                 child: Container(
                   child: Container(
                     margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 16.0),
-                    child: Row(
-                      children: scoreKeeper,
+                    child: Column(
+                      children: <Widget>[
+                        Row(
+                          children: scoreKeeper1,
+                        ),
+                        Row(
+                          children: scoreKeeper2,
+                        ),
+                      ],
                     ),
                   ),
                 ),
